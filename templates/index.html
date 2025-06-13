@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>魚塭監控系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
+    <script>
+function updateQueryParam(param, value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(param, value);
+    window.location.href = url.href;
+}
+</script>
+
+</head>
+<body>
+
+<div class="header-bar">
+  <h1><span id="fish-icon">🐟</span> 魚塭監控資訊</h1>
+  <img src="{{ url_for('static', filename='banner.png') }}" alt="魚塭 Banner" class="header-banner">
+</div>
+
+
+    <section>
+        <h2>最新感測資料</h2>
+        <ul>
+            <li><strong>時間：</strong>{{ sensor[1] }}</li>
+            <li><strong>溫度：</strong>{{ sensor[2] }} °C</li>
+            <li><strong>濁度：</strong>{{ sensor[3] }} NTU</li>
+        </ul>
+    </section>
+
+<form>
+  <label for="feed_count">選擇餵食紀錄筆數：</label>
+  <select id="feed_count" onchange="updateQueryParam('feed_count', this.value)">
+    <option value="5" {% if feed_count == 5 %}selected{% endif %}>5 筆</option>
+    <option value="10" {% if feed_count == 10 %}selected{% endif %}>10 筆</option>
+    <option value="20" {% if feed_count == 20 %}selected{% endif %}>20 筆</option>
+    <option value="50" {% if feed_count == 50 %}selected{% endif %}>50 筆</option>
+  </select>
+</form>
+
+
+
+    <section>
+        <h2>近期餵食紀錄</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>溫度 (°C)</th>
+                    <th>濁度 (NTU)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in logs %}
+                <tr>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+<form method="get" style="margin-top: 10px;">
+    <label for="count">選擇顯示資料筆數：</label>
+    <select name="count" id="count" onchange="this.form.submit()">
+        <option value="5" {% if count == 5 %}selected{% endif %}>5 筆</option>
+        <option value="10" {% if count == 10 %}selected{% endif %}>10 筆</option>
+        <option value="20" {% if count == 20 %}selected{% endif %}>20 筆</option>
+        <option value="50" {% if count == 50 %}selected{% endif %}>50 筆</option>
+    </select>
+</form>
+
+
+    <section>
+        <h2>水溫趨勢圖（Temperature）</h2>
+        <canvas id="tempChart" height="100"></canvas>
+    </section>
+
+
+<form>
+  <label for="turb_count">選擇濁度資料筆數：</label>
+  <select id="turb_count" onchange="updateQueryParam('turb_count', this.value)">
+    <option value="5" {% if turb_count == 5 %}selected{% endif %}>5 筆</option>
+    <option value="10" {% if turb_count == 10 %}selected{% endif %}>10 筆</option>
+    <option value="20" {% if turb_count == 20 %}selected{% endif %}>20 筆</option>
+    <option value="50" {% if turb_count == 50 %}selected{% endif %}>50 筆</option>
+  </select>
+</form>
+
+
+    <section>
+        <h2>濁度趨勢圖（Turbidity）</h2>
+        <canvas id="turbChart" height="100"></canvas>
+    </section>
+
+    <script>
+        const labels = {{ times | tojson }};
+        const tempData = {{ temps | tojson }};
+        const turbData = {{ turbs | tojson }};
+
+        // 溫度圖表
+        const tempChart = new Chart(document.getElementById('tempChart').getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '溫度 (°C)',
+            data: tempData,
+            borderColor: 'black',        // 固定線條為黑
+            tension: 0,
+            pointRadius: 5,
+            pointBackgroundColor: tempData.map(val => {
+                if (val > 30) return 'red';
+                if (val < 24) return 'blue';
+                return 'black';
+            }),
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+  title: {
+    display: true,
+    text: '最近水溫變化',
+    font: { size: 16 }
+  },
+  legend: {
+    display: true,
+    position: 'top'
+  },
+  annotation: {
+    annotations: {
+      highTemp: {
+        type: 'box',
+        yMin: 30,
+        yMax: 40,
+        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+        borderWidth: 0
+      },
+      lowTemp: {
+        type: 'box',
+        yMin: 0,
+        yMax: 24,
+        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+        borderWidth: 0
+      }
+    }
+  }
+}
+
+
+,
+        scales: {
+            x: { title: { display: true, text: '時間' } },
+            y: { title: { display: true, text: '溫度 (°C)' },
+    min: 15,
+    max: 40 }
+        }
+    }
+});
+
+
+
+        // 濁度圖表
+        
+const turbChart = new Chart(document.getElementById('turbChart').getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '濁度 (NTU)',
+            data: turbData,
+            borderColor: 'rgb(54, 162, 235)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            fill: true,
+            tension: 0.3,
+
+            // ✅ 實心圓設定（新增這兩行）
+            pointRadius: 5,
+            pointBackgroundColor: turbData.map(val => val > 50 ? 'red' : 'black'),
+            pointBorderColor: turbData.map(val => val > 50 ? 'red' : 'black'),
+            pointBorderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '濁度趨勢變化' },
+            legend: { display: true }
+        },
+        scales: {
+            x: { title: { display: true, text: '時間' } },
+            y: { title: { display: true, text: '濁度 (NTU)' }, beginAtZero: true }
+        }
+    }
+});
+
+
+
+    </script>
+
+
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const fish = document.getElementById("fish-icon");
+  fish.addEventListener("click", function() {
+    fish.classList.add("fish-spin");
+    setTimeout(() => {
+      fish.classList.remove("fish-spin");
+    }, 1000);
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+<!-- index.html 結尾前 -->
+
+<footer class="site-footer">
+  <div class="footer-column">
+    <h3>系統時間</h3>
+    <ul>
+
+      <li>系統最後更新時間：</li>
+      <li id="current-time">{{ latest_time }}</li>
+    </ul>
+  </div>
+  <div class="footer-column">
+    <h3>最新消息</h3>
+    <ul>
+      <li>系統資料更新完成（2025/06/03）</li>
+      <li>新增圖表顏色範圍（2025/05/28）</li>
+    </ul>
+  </div>
+  <div class="footer-column">
+    <h3>聯絡我們</h3>
+    <ul>
+      <li>Email：support@fishpond.com</li>
+      <li>開發者：唱K銀龍魚</li>
+      <li>地址：台灣台中市魚塭路88號</li>
+    </ul>
+  </div>
+  <div class="footer-column">
+    <h3>關於本系統</h3>
+    <ul>
+      <li>即時監測溫度與濁度</li>
+      <li>Flask + Chart.js 製作</li>
+      <li>版本：1.0</li>
+      <li>© 2025 FishPond System</li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
