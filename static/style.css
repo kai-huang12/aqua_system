@@ -1,0 +1,140 @@
+
+body {
+  font-family: "Microsoft JhengHei", sans-serif;
+  margin: 30px;
+  background: #f9f9f9;
+}
+
+h1 {
+  font-size: 32px;
+  color: #1e88e5;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 2px solid #90caf9;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #cceeff;
+}
+
+canvas {
+  margin-top: 20px;
+}
+section {
+  background: #fff;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+thead th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f1f8ff;
+}
+
+tbody tr:hover {
+  background-color: #d7edff;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.fish-spin {
+  display: inline-block;
+  animation: spin 1s ease;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* ✅ 若螢幕太小，自動換行 */
+  margin-bottom: 30px;
+}
+
+.header-bar h1 {
+  font-size: 2em;
+  color: #1e90ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0;
+  text-align: center;
+}
+
+#fish-icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.header-banner {
+  width: 380px;       /* 約等於 10 公分 */
+  max-width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #2f3b4c;
+  color: white;
+  padding: 30px 20px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.footer-column h3 {
+  border-bottom: 2px solid #1e90ff;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
