@@ -24,10 +24,11 @@
 
 #檔案須以github上方式擺放
 檔案用途：
-1.app.py：主控程式，連接MySQL，前端及後端處理
-2.dc.py：藉由dc及時通知使用者警示及偵測訊息
-3.index.html：前端網頁功能
-4.style.css：前端網頁美化
+1. app.py：主控程式，連接MySQL，前端及後端處理
+2. dc.py：藉由dc及時通知使用者警示及偵測訊息
+3. index.html：前端網頁功能
+4. style.css：前端網頁美化
+
 
 
 
