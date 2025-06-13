@@ -13,9 +13,12 @@
 5. Esp32 開發板
 
 硬體連接圖
+
 ![image](https://github.com/user-attachments/assets/6550de4a-3cd5-490f-b82c-6c9847355d7b)
 
+
 資料庫結構
+
 ![image](https://github.com/user-attachments/assets/6a99f08a-5842-4ac6-8e66-950db6fc8a16)
 ![image](https://github.com/user-attachments/assets/fc279486-7c38-4b7c-b6bf-efacd04e2dc0)
 
