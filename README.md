@@ -31,6 +31,13 @@
 3. index.html：前端網頁功能
 4. style.css：前端網頁美化
 
+前端顯示結果：
+![image](https://github.com/user-attachments/assets/68687269-7686-49f1-af1c-7cee6c7d8cf2)
+![image](https://github.com/user-attachments/assets/45636ce9-2d2a-450a-9758-ab61a43efc7b)
+![image](https://github.com/user-attachments/assets/286ac83e-ffbb-416a-b955-480e2bbadd75)
+
+
+
 
 
 
