@@ -22,6 +22,15 @@
 ![image](https://github.com/user-attachments/assets/6a99f08a-5842-4ac6-8e66-950db6fc8a16)
 ![image](https://github.com/user-attachments/assets/fc279486-7c38-4b7c-b6bf-efacd04e2dc0)
 
+#檔案須以github上方式擺放
+檔案用途：
+1.app.py：主控程式，連接MySQL，前端及後端處理
+2.dc.py：藉由dc及時通知使用者警示及偵測訊息
+3.index.html：前端網頁功能
+4.style.css：前端網頁美化
+
+
+
 
 
 
