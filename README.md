@@ -16,6 +16,11 @@
 
 ![image](https://github.com/user-attachments/assets/6550de4a-3cd5-490f-b82c-6c9847355d7b)
 
+>開啟飼料投餵
+<img width="338" height="300" alt="image" src="https://github.com/user-attachments/assets/23f424a8-5567-4930-9a65-c59449eaee5c" />
+
+>關閉飼料投餵
+<img width="333" height="298" alt="image" src="https://github.com/user-attachments/assets/e2711642-a609-4b7b-bd15-9c1b4b669504" />
 
 資料庫結構
 
