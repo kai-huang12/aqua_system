@@ -22,6 +22,16 @@
 ![image](https://github.com/user-attachments/assets/6a99f08a-5842-4ac6-8e66-950db6fc8a16)
 ![image](https://github.com/user-attachments/assets/fc279486-7c38-4b7c-b6bf-efacd04e2dc0)
 
+Discord Webhook 通知
+
+>Discord 及時水溫數值通知
+<img width="408" height="298" alt="image" src="https://github.com/user-attachments/assets/655d88df-260b-4c11-895e-f51bdc92d082" />
+
+>水質數據異常警示
+<img width="416" height="298" alt="image" src="https://github.com/user-attachments/assets/d3e0463a-0fd8-442c-a68b-2499a2e7b3ee" />
+
+
+
 #檔案須以github上方式擺放
 
 
