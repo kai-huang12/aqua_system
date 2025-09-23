@@ -48,7 +48,7 @@ Discord Webhook 通知
 5. iot.ino：硬體控制程式碼
 
 
-前端顯示結果：
+網頁顯示結果：
 
 ![image](https://github.com/user-attachments/assets/68687269-7686-49f1-af1c-7cee6c7d8cf2)
 ![image](https://github.com/user-attachments/assets/45636ce9-2d2a-450a-9758-ab61a43efc7b)
