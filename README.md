@@ -5,7 +5,21 @@
 >同時使用時鐘模組紀錄餵食間隔，避免餵食頻率過高或高低。
 >綜合以上功能，整合成水質偵測系統，並藉由機器判斷是否適合投餵飼料，並藉由自動投餵飼料，省去人工判斷及投餵飼料的時間，只需定期補充飼料庫存。
 
+系統優勢：
+
+1.相較於傳統仰賴 ORP 偵測器的高成本作法，本研究採用濁度與溫度感測器，能以較低成本達到近似甚至更佳的監控效果
+
+2.自動偵測水質、餵食魚群：藉由自動偵測水質及餵食，能提醒使用者水質警訊，並輔以自動餵食，使使用者不必擔心餵食問題，僅需定期補充飼料。
+
 影片介紹連結：https://www.youtube.com/watch?v=Yr-skVqF2BE
+
+系統及軟體設計架構：
+> 系統啟動後，ESP32 接收感測器資料，將數據傳送至 MySQL，
+> Python 與 Flask進行網站的邏輯處理、資料庫請求及分析資料並顯示圖表於網頁供使用者檢視，
+> 異常行為則即時由 Discord 發送警訊，同時也藉由 Discord 定時發送水質狀況，讓使用者能隨時監控，並即時做出應對。
+<img width="865" height="285" alt="image" src="https://github.com/user-attachments/assets/6eeaf8f5-b82b-4793-99c3-2607b3796f1f" />
+<img width="833" height="516" alt="image" src="https://github.com/user-attachments/assets/822c261e-004c-4234-bdee-79876dfd9cbb" />
+
 
 相關硬體需求：
 1. SEN0189 光學濁度感測器模組
@@ -57,9 +71,8 @@ Discord Webhook 通知
 ![image](https://github.com/user-attachments/assets/286ac83e-ffbb-416a-b955-480e2bbadd75)
 
 
-
-
-
+未來展望：
+> 可新增溶氧與 pH 偵測，甚至開發行動應用程式，提供使用者更智慧化的管理工具。
 
 
 
